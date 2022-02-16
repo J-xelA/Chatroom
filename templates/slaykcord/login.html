@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <style>
+      .jumbotron {
+        position: relative;
+        padding: 5px;
+        margin-top: 50px;
+        background: rgba(0, 0, 0, 0.1);
+        margin-bottom: 0;
+      }
+    </style>
+
+    <div class="container">
+      <div class = "jumbotron">
+        <form action="/login/" method="POST">{% csrf_token %}
+          <table style="border-spacing: 15px; border-collapse: separate;">
+            {{ login_form.as_table }}
+            <tr><td>
+              <input type="submit" class="btn btn-primary" value = "Login"/>
+            </td></tr>
+            <tr><td>Click <a href="/join">here</a> to join.</td></tr>
+          </table>
+        </form>
+      </div>
+    </div>
+
+{% endblock %}

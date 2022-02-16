@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Tickets{% endblock %}
+
+{% block content %}
+
+  <style>
+    .jumbotron {
+        position: relative;
+        margin-top: 50px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        background: rgba(0, 0, 0, 0.1);
+        margin-bottom: 0;
+    }
+  </style>
+
+  <div class="container">
+  	<div class="jumbotron">
+      <td>
+        <a class="btn btn-primary" href="/ticket/hideStatus/" style="margin-bottom: 15px;">Hide Completed</a>
+      </td>
+      <td>
+        <a class="btn btn-primary" href="/ticket/showStatus/" style="margin-bottom: 15px;">Show Completed</a>
+      </td>
+  	  <h1 style="font-size: 25px; padding-bottom: 15px;">Items</h1>
+  	  {% if not table_data %}
+        </p>There are no items to display.</p>
+  	  {% else %}
+  			<table class="table table-striped" border="1" style="border-spacing: 15px;">
+  	    <tr>
+          <th>User</th>
+          <th>Description</th>
+  				<th>Entry</th>
+          <th>Completed</th>
+  	    </tr>
+  	    {% for row in table_data %}
+  	    	<tr>
+            <td>{{ row.name }}</td>
+            <td>{{ row.description }}</td>
+            <td>{{ row.entry }}</td>
+            <td><a href="/ticket/updateStatus/{{row.id}}">{{row.status}}</a></td>
+  				</tr>
+  	    {% endfor %}
+  		  </table>
+  		{% endif %}
+  	  <form method="GET" action="/ticket/add/">
+  	    <input type="submit" class="btn btn-primary" value = "Add Item">
+  	  </form>
+  	</div>
+  </div>
+
+{% endblock %}
